@@ -15,3 +15,6 @@ pip install python-jose
 pip install bcrypt
 pip install passlib
 pip install -r requirements.txt
+
+//video course
+https://www.youtube.com/watch?v=7t2alSnE2-I
