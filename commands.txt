@@ -1,2 +1,16 @@
+// git commands
 git init
 git branch -m main
+git add .
+git commit -m 'first commit with initial api'
+git remote add origin 'https://github.com/die711/fastapi_sqlalchemy_sqlite_bitfumesbi.git'
+git push origin -u main
+
+
+// python, pip commands
+python -m venv blog-env
+pip freeze  > requirements.txt
+pip install python-jose
+pip install bcrypt
+pip install passlib
+pip install -r requirements.txt
