@@ -31,13 +31,13 @@ class CreateUser(UserBase):
 class ShowUser(UserBase):
     id: int
 
-    blogs = List[Blog]
+    blogs: List[Blog]
 
 
 class ShowBlog(BlogBase):
     id: int
 
-    # creator: User
+    creator: User
 
 
 class Token(BaseModel):
@@ -47,4 +47,3 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
-
