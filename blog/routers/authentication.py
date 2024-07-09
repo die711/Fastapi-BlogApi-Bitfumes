@@ -4,14 +4,14 @@ from blog.database import models, database
 from blog.auth import token
 from blog.utils import hashing
 from sqlalchemy.orm import Session
-from blog.schemas.token import Token
+from blog.schemas import schemas
 
 router = APIRouter(
     tags=['Authentication'],
 )
 
 
-@router.post('/login', response_model=Token)
+@router.post('/login', response_model=schemas.Token)
 def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
     user = db.query(models.User).filter(models.User.email == request.username).first()
 
@@ -26,4 +26,4 @@ def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(
         data={'sub': user.email}
     )
 
-    return Token(access_token=access_token, token_type='bearer')
+    return schemas.Token(access_token=access_token, token_type='bearer')

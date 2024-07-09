@@ -1,6 +1,6 @@
 from fastapi import status, HTTPException
 from sqlalchemy.orm import Session
-from blog.schemas.blog import CreateBlog, ShowBlog
+from blog.schemas import schemas
 from blog.database import models
 
 
@@ -9,7 +9,7 @@ def get_all(db: Session):
     return blogs
 
 
-def create(request: CreateBlog, db: Session):
+def create(request: schemas.CreateBlog, db: Session):
     new_blog = models.Blog(title=request.title, body=request.body, user_id=1)
     db.add(new_blog)
     db.commit()
@@ -28,7 +28,7 @@ def destroy(id: int, db: Session):
     db.commit()
 
 
-def update(id: int, request: CreateBlog, db: Session):
+def update(id: int, request: schemas.CreateBlog, db: Session):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
 
     if not blog.first():
@@ -39,7 +39,7 @@ def update(id: int, request: CreateBlog, db: Session):
     return 'updated successfully'
 
 
-def show(id: int, db: Session) -> ShowBlog:
+def show(id: int, db: Session) -> schemas.ShowBlog:
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     if not blog:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
-from blog.schemas.token import TokenData
+from blog.schemas import schemas
 from fastapi import HTTPException, status
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
@@ -31,6 +31,6 @@ def verify_token(token: str):
         if email is None:
             raise credentials_exception
 
-        return TokenData(email=email)
+        return schemas.TokenData(email=email)
     except JWTError:
         raise credentials_exception
